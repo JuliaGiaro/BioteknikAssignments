@@ -1,7 +1,13 @@
 import numpy as np
 import networkx as nx
 
+#I decided to traverse trough the nodes x y ans z coordinates and deciding the shortest path between them
+#the best method to do that was to take the weight as the distance and then check which one is the closest while keeping
+#track of which ones you have visited, lastly print them out.
+#before I started with these methods I wanted to visualize the points in a 3d graph (not shown) and wanted to include it as well in
+#my code but decided it was redundant (also it casued wierd behaviour with the output)
 
+#the only things you need for this program to run is numpy and networkx while using python. (I used the python version 3.12)
 def calculate_distance(point1, point2):
     return np.sqrt(np.sum((point1 - point2) ** 2))
 
@@ -27,7 +33,7 @@ def find_shortest_chain(coordinates, target_distance=3.8):
         while len(visited) < n:
             current_node = order[-1]
 
-            # Find the closest unvisited neighbor with the modified edge weight
+            
             neighbors = [(neighbor, data['weight']) for neighbor, data in graph[current_node].items() if
                          neighbor not in visited]
             if neighbors:
@@ -76,5 +82,6 @@ def find_and_print_order(coordinates):
 
 print("data file:")
 find_and_print_order(file1_coordinates)
+
 print("test file:")
 find_and_print_order(test_coordinates)
